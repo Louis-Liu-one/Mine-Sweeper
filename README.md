@@ -3,7 +3,7 @@ A simple Mine Sweeper game by Liu One.
 
 Copyright © 2024 Liu One  *All rights reserved.*
 
-## How to play?
+## How to Play?
 * First, click to mark a cell as a mine.
 
 * Second, double click to open a cell.
@@ -12,7 +12,7 @@ Copyright © 2024 Liu One  *All rights reserved.*
 
 * Finally, play the game!
 
-## Some skills to play
+## Some Skills to Play
 **LEGEND**
  Sign|Mean
 ----:|----
@@ -62,3 +62,17 @@ F|5|F
 #|F|#
 
 These are the four basic skill to play Mine Sweeper. You can explore more laws to become a mine sweeper expert!
+
+## File Structure
+There are three Python files and some GIF pictures in this game.
+
+### Python Files
+* `minesweeper.py` The main file. Open the window and play.
+* `minehelper.py` The documents above are in this file. Create a window and include the documents.
+* `manyinputdialog.py` Dialog which can ask many kinds of inputs, such as int, string, file or choose.
+
+### GIF Pictures
+Such as pictures of the flag and the mine.
+
+## Finally
+I hope that you can play happily!
