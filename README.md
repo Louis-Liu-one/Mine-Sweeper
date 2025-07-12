@@ -1,93 +1,84 @@
-# MineSweeper
+# Mine Sweeper
+A simple Mine Sweeper game made by Liu One.
 
+Copyright © 2024 Liu One  *All rights reserved.*
 
+## How to Play?
+* First, single click to mark a cell as a mine.
 
-## Getting started
+* Second, double click to open a cell.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+* Third, if a green *click* cell appears, click it first.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+* Finally, have a good time!
 
-## Add your files
+## Some Skills to Play
+**LEGEND**
+ Sign|Meaning
+----:|----
+**4**|An opened cell
+**F**|A cell which has been marked as a mine
+**#**|A cell which can be opened
+**!**|A cell which must be a mine
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+Don't know how to play the game? Here are some tips:
 
-```
-cd existing_repo
-git remote add origin https://jihulab.com/LouisLiu/minesweeper.git
-git branch -M main
-git push -uf origin main
-```
+First, the showed number when you click a cell means the number of the mine around the cell you click. If the number is $n$, we call the opened cell an ``$n$-cell''. For example,
+!|3|!
+-|-|-
+!|4|2
+1|2|!
 
-## Integrate with your tools
+Second, if you know a cell is a mine, you can mark it by a single clicking. Besides, if you know a cell is not a mine, you can open it by a double clicking.
+0|1|F
+-|-|-
+1|2|2
+1|F|1
 
-- [ ] [Set up project integrations](https://jihulab.com/LouisLiu/minesweeper/-/settings/integrations)
+But how to know whether a cell is a mine? The following tips can be helpful:
 
-## Collaborate with your team
+Third, if $8 - n$ cells around an $n$-cell are opened, then the other $n$ cells around the $n$-cell are all mines.
+0|1|!
+-|-|-
+1|2|2
+1|!|1
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+For example, if 5 cells around a 3-cell are opened, then the other 3 cells around the 3-cell are all mines.
+1|2|!
+-|-|-
+!|3|2
+2|!|1
 
-## Test and Deploy
+Fourth, if $n$ cells around an $n$-cell have been marked as a mine, then all the other $8 - n$ cells around the $n$-cell can be opened. For example, $n = 3$:
+#|#|F
+-|-|-
+F|3|#
+#|F|#
 
-Use the built-in continuous integration in GitLab.
+This law is the reverse of the Third Law.
+#|F|F
+-|-|-
+F|5|F
+#|F|#
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+These are the 4 basic skills to play the game. You can explore more laws and become an expert!
 
-***
+## File Structure
+There are 5 Python files, some GIF images and other files.
 
-# Editing this README
+### Python Files
+* `main.py` The main program. Run this to open the window and play.
+* `minesweeper.py` The major file. The core of the game.
+* `minehelper.py` The documents above are in this file. Create a window and include the documents.
+* `manyinputdialog.py` Dialog which can ask many kinds of inputs, such as int, string, file or choose.
+* `utility.py` Some useful functions.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### GIF Images
+Such as images of the flag and the mine. These images are in the folder `images/`.
 
-## Suggestions for a good README
+### Other Files
+* `makefile` Pack the game as a MacOS application bundle with Nuitka.
+* `favicon.icns` The icon of the bundle.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Finally
+I hope you can enjoy yourself!
