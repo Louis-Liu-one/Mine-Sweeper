@@ -17,7 +17,7 @@ from tkinter.filedialog import askopenfilename
 class ManyInputDialog(tk.Toplevel):
     '''
     多参数对话框。
-    用法：
+    用例：
     dialog = ManyInputDialog(
         root, 'This is the title', 'This is the prompt:',
         ('integer', int, {'minvalue': 3, 'initialvalue': 5}),
@@ -48,18 +48,22 @@ class ManyInputDialog(tk.Toplevel):
     def __init__(self, master, title, prompt, *inputs):
         '''
         初始化多参数对话框。
-        *inputs :: 形如('a',int,{'minvalue':3}),('b',float,{'initialvalue':10})
-                   的参数列表。第一个值是参数的提示；第二个值是需要的类型，支持int、float、str、
-                   list、'file'；第三个值是可选参数，支持required、minvalue、maxvalue、
+          title :: 窗口标题。
+         prompt :: 对话框中最上方的提示词，可以为空。
+        *inputs :: 形如[('a', int, {'minvalue': 3}),
+                   ('b', float, {'initialvalue': 10})]的参数列表。第一个值是参数的
+                   提示；第二个值是需要的类型，支持int、float、str、list、'file'；第
+                   三个值是可选参数，支持required、minvalue、maxvalue、
                    initialvalue、choices、radio、filetypes。
 
-                       required: 是否是必选项，默认为True
-                       minvalue: 最小值，默认为-inf，若期望类型为int/float，则会检查
-                       maxvalue: 最大值，默认为inf，若期望类型为int/float，则会检查
-                   initialvalue: 初始值，int: 0，float: 0.0，str: ''，list: 第一个选项
-                        choices: 期望类型为list时的选项，如['choice-1', 'choice-2']，
-                                 可迭代，默认为[]
-                          radio: 是否为单选，默认为True
+                       required: 是否是必选项，默认为True；
+                       minvalue: 最小值，默认为-inf，若期望类型为int/float，则会检查；
+                       maxvalue: 最大值，默认为inf，若期望类型为int/float，则会检查；
+                   initialvalue: 初始值，int: 0，float: 0.0，str: ''，
+                                 list: 第一个选项；
+                        choices: 期望类型为list时的选项，如
+                                 ['choice-1', 'choice-2']，可迭代，默认为[]；
+                          radio: 是否为单选，默认为True；
                       filetypes: 可以选择的文件的类型，默认为所有文件。
         返回的值通过dialog.outputs访问。
         '''
@@ -69,11 +73,10 @@ class ManyInputDialog(tk.Toplevel):
         self.configure(menu=tk.Menu(self))
 
         self.title(title)
+        count = 0
         if prompt:  # 若提示语为空，则不空行
             tk.Label(self, text=prompt).grid(columnspan=2, sticky=W)
             count = 1  # 控制行数的变量
-        else:
-            count = 0
         self.outputs = []    # 类返回，也就是得到正确结果之时访问此属性
         self.inputvars = []  # 询问时用到的tkinter变量
 
@@ -159,8 +162,8 @@ class ManyInputDialog(tk.Toplevel):
             try:
                 # 输入，可能出错
                 if inputtype != list:
-                    self.outputs.append(var.get())         # 添加到结果列表
-                    if (inputtype in (int, float)          # 若是数字，则检查最大最小值
+                    self.outputs.append(var.get())  # 添加到结果列表
+                    if (inputtype in (int, float)   # 若是数字，则检查最大最小值
                             and (
                                 var.get() < paras['minvalue']
                                 or var.get() > paras['maxvalue'])):
@@ -189,11 +192,11 @@ if __name__ == '__main__':
     root = tk.Tk()
     dialog = ManyInputDialog(
         root, 'This is the title', 'This is the prompt:',
-        ('integer', int, {'minvalue': 3, 'initialvalue': 5}),
-        ('float', float, {'maxvalue': 1, 'initialvalue': 0.2}),
-        ('string', str, {'initialvalue': 'This is my string'}),
-        ('radiobutton', list, {'choices': ['Yes', 'No', "Don't know"]}),
-        ('checkbutton', list, {'choices': ['A', 'B', 'C'], 'radio': False}),
-        ('file chooser', 'file', {'filetypes': [('Python Files', '*.py')]}))
+        ('Integer', int, {'minvalue': 3, 'initialvalue': 5}),
+        ('Float', float, {'maxvalue': 1, 'initialvalue': 0.2}),
+        ('String', str, {'initialvalue': 'This is my string'}),
+        ('Radio Buttons', list, {'choices': ['Yes', 'No', "Don't know"]}),
+        ('Check Buttons', list, {'choices': ['A', 'B', 'C'], 'radio': False}),
+        ('File Chooser', 'file', {'filetypes': [('Python Files', '*.py')]}))
     print(dialog.outputs)
     root.mainloop()
