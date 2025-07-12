@@ -1,5 +1,5 @@
 # Mine Sweeper
-A simple Mine Sweeper game by Liu One.
+A simple Mine Sweeper game made by Liu One.
 
 Copyright © 2024 Liu One  *All rights reserved.*
 
@@ -14,28 +14,28 @@ Copyright © 2024 Liu One  *All rights reserved.*
 
 ## Some Skills to Play
 **LEGEND**
- Sign|Mean
+ Sign|Meaning
 ----:|----
-**4**|Opened cell
-**F**|Cell which has been marked as a mine
-**#**|Cell which can be opened
-**!**|Cell which must be mine
+**4**|An opened cell
+**F**|A cell which has been marked as a mine
+**#**|A cell which can be opened
+**!**|A cell which must be a mine
 
-Don't know how to play this game? Here are some tips:
+Don't know how to play the game? Here are some tips:
 
-First, the number which shows when you click a cell is the number of the mine around the cell you click. For example,
+First, the showed number when you click a cell means the number of the mine around the cell you click. If the number is $n$, we call the opened cell an ``$n$-cell''. For example,
 !|3|!
 -|-|-
 !|4|2
 1|2|!
 
-Second, if you know a cell is a mine by logical reasoning you can mark it by clicking. Besides, if you know a cell is not a mine by logical reasoning, you can open it by double clicking.
+Second, if you know a cell is a mine, you can mark it by a single clicking. Besides, if you know a cell is not a mine, you can open it by a double clicking.
 0|1|F
 -|-|-
 1|2|2
 1|F|1
 
-But how to reasoning logically?
+But how to know whether a cell is a mine? The following tips can be helpful:
 
 Third, if $8 - n$ cells around an $n$-cell are opened, then the other $n$ cells around the $n$-cell are all mines.
 0|1|!
@@ -67,7 +67,8 @@ These are the four basic skill to play Mine Sweeper. You can explore more laws t
 There are three Python files and some GIF pictures in this game.
 
 ### Python Files
-* `minesweeper.py` The main file. Open the window and play.
+* `main.py` The main program. Open the window and play.
+* `minesweeper.py` The major file. The core of the game.
 * `minehelper.py` The documents above are in this file. Create a window and include the documents.
 * `manyinputdialog.py` Dialog which can ask many kinds of inputs, such as int, string, file or choose.
 
