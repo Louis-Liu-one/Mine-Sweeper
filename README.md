@@ -4,13 +4,13 @@ A simple Mine Sweeper game made by Liu One.
 Copyright © 2024 Liu One  *All rights reserved.*
 
 ## How to Play?
-* First, click to mark a cell as a mine.
+* First, single click to mark a cell as a mine.
 
 * Second, double click to open a cell.
 
-* Third, click the green *click* sign first.
+* Third, if a green *click* cell appears, click it first.
 
-* Finally, play the game!
+* Finally, have a good time!
 
 ## Some Skills to Play
 **LEGEND**
@@ -55,25 +55,30 @@ Fourth, if $n$ cells around an $n$-cell have been marked as a mine, then all the
 F|3|#
 #|F|#
 
-This principle is the reverse of the Third Law.
+This law is the reverse of the Third Law.
 #|F|F
 -|-|-
 F|5|F
 #|F|#
 
-These are the four basic skill to play Mine Sweeper. You can explore more laws to become a mine sweeper expert!
+These are the 4 basic skills to play the game. You can explore more laws and become an expert!
 
 ## File Structure
-There are three Python files and some GIF pictures in this game.
+There are 5 Python files, some GIF images and other files.
 
 ### Python Files
-* `main.py` The main program. Open the window and play.
+* `main.py` The main program. Run this to open the window and play.
 * `minesweeper.py` The major file. The core of the game.
 * `minehelper.py` The documents above are in this file. Create a window and include the documents.
 * `manyinputdialog.py` Dialog which can ask many kinds of inputs, such as int, string, file or choose.
+* `utility.py` Some useful functions.
 
-### GIF Pictures
-Such as pictures of the flag and the mine.
+### GIF Images
+Such as images of the flag and the mine. These images are in the folder `images/`.
+
+### Other Files
+* `makefile` Pack the game as a MacOS application bundle with Nuitka.
+* `favicon.icns` The icon of the bundle.
 
 ## Finally
-I hope that you can play happily!
+I hope you can enjoy yourself!
