@@ -88,6 +88,7 @@ class Application(tk.Frame):
         self.block_grid = self.GUI_grid_buttons()  # 创建新按钮
         if filename is not None:
             self.GUI_update_cells()  # 更新格子
+        self.first_click = True
 
     def save_board(self, event=None):
         '''保存棋盘。'''
