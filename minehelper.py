@@ -49,7 +49,7 @@ class Helper(tk.Toplevel):
 
     def setup_images(self):
         '''载入图片。'''
-        folder = str(Path(__file__).parent.resolve()) + '/'
+        folder = 'images/'
         self.flag = tk.PhotoImage(file=folder + 'flag.gif')
         self.mine = tk.PhotoImage(file=folder + 'mine.gif')
         self.empty = tk.PhotoImage(file=folder + 'empty.gif')
