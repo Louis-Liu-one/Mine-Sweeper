@@ -13,5 +13,7 @@ build: *.py images/*
 		--macos-create-app-bundle \
 		--macos-app-name='$(NAME)' \
 		--macos-app-icon='favicon.icns' \
-		--macos-app-version='1.0' \
-		'main.py'
+		--macos-app-version='1.0.0' \
+		--script-name='main.py'
+	mv 'build/main.app' '$(NAME).app'
+	rm -r 'build'
