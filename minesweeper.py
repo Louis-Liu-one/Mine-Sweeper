@@ -221,7 +221,7 @@ class Application(tk.Frame):
 
     def GUI_load_image(self):
         '''加载所需图标。'''
-        folder = str(pathlib.Path(__file__).parent.resolve()) + '/images/'
+        folder = 'images/'
         self.flag_image = tk.PhotoImage(file=folder + 'flag.gif')      # 旗子
         self.mine_image = tk.PhotoImage(file=folder + 'mine.gif')      # 雷
         self.empty_image = tk.PhotoImage(file=folder + 'empty.gif')    # 空白
