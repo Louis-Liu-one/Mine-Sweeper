@@ -49,6 +49,7 @@ class Application(tk.Frame):
         self.recent_grids = [sequence_copy(self.grid)]  # 历史记录，用于撤销操作
         self.first_click = True                         # 是否初次点击
         self.have_won = False                           # 是否胜利
+        self.auto = tk.IntVar(self, 0)                  # 是否自动排雷
         if filename is None:  # 未传入mboard文件
             self.block_grid = []
             self.new_game()   # 自主询问信息
@@ -325,42 +326,44 @@ class Application(tk.Frame):
                 for di, dj in self.around_blocks:  # 打开周围的格子
                     self.GUI_open_block(i + di, j + dj)
             if istop and not self.have_won and self.check_end():  # 判断是否成功
-                showinfo('Succeed', 'Winner!', parent=self.master)
+                showinfo('Succeed', 'Win!', parent=self.master)
                 self.have_won = True
         elif state == 1:  # 是雷，失败
             # 将格子更新为雷的图片
             self.block_grid[i][j].configure(image=self.mine_image)
             if istop:  # 是顶层函数
-                for gi in range(self.height):
-                    for gj in range(self.width):
-                        # 检查标错的格子
-                        if (self.grid[gi][gj][1] == 1
-                                and self.grid[gi][gj][0] != -1):
-                            # 将标错的格子设为红色
-                            self.block_grid[gi][gj].configure(
-                                image=self.wrong_image)
-                            self.grid[gi][gj][1] = 2
-                for gi in range(self.height):
-                    for gj in range(self.width):
-                        # 下面的调用不是顶层函数
-                        self.GUI_open_block(gi, gj)  # 打开所有格子
-                self.update()
-                # 重新尝试同一棋盘、尝试新棋盘、或什么也不做
-                result = askyesnocancel(
-                    'Failed!',
-                    'You have stepped on a mine! Retry?'
-                    ' Yes to retry the same mine board,'
-                    ' No to create a new game'
-                    ' and Cancel to close this window.',
-                    icon=WARNING, parent=self.master)
-                if result is not None:
-                    (self.retry if result else self.new_game)()
+                self.GUI_failed()
         if istop:  # 自动标记雷并记录历史
-            self.GUI_auto_mark_mine()
-            if auto_open_block:
-                self.GUI_auto_open_block()
+            if self.auto.get():
+                self.GUI_auto_mark_mine()
+                if auto_open_block:
+                    self.GUI_auto_open_block()
             self.recent_grids.append(sequence_copy(self.grid))
         return state
+
+    def GUI_failed(self):
+        '''踩到雷，游戏失败时调用。'''
+        for i in range(self.height):
+            for j in range(self.width):
+                # 检查标错的格子
+                if self.grid[i][j][1] == 1 and self.grid[i][j][0] != -1:
+                    # 将标错的格子设为红色
+                    self.block_grid[i][j].configure(image=self.wrong_image)
+                    self.grid[i][j][1] = 2
+        for i in range(self.height):
+            for j in range(self.width):
+                # 下面的调用不是顶层函数
+                self.GUI_open_block(i, j)  # 打开所有格子
+        self.update()
+        result = askyesnocancel(
+            'Failed!',
+            'You have stepped on a mine! Retry?'
+            ' Yes to retry the same mine board,'
+            ' No to create a new game'
+            ' and Cancel to close this window.',
+            icon=WARNING, parent=self.master)
+        if result is not None:
+            (self.retry if result else self.new_game)()
 
     def GUI_auto_mark_mine(self):
         '''

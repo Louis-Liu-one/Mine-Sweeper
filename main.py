@@ -79,6 +79,11 @@ def setup_menu(root, app):
         label='Save Board', command=app.save_board, accelerator='Command+S')
     operations_menu.add_command(
         label='Undo', command=app.GUI_undo, accelerator='Command+Z')
+    operations_menu.add_separator()
+    operations_menu.add_radiobutton(
+        label='Auto Mine', variable=app.auto, value=1)
+    operations_menu.add_radiobutton(
+        label='No Auto Mine', variable=app.auto, value=0)
     menu.add_cascade(label='Operations', menu=operations_menu)  # 操作
     help_menu = tk.Menu(menu)
     help_menu.add_command(label='Show Help', command=app.show_help)
